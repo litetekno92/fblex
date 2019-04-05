@@ -16,22 +16,7 @@ class MyAppState extends State<MyApp> {
       future: loadStudent(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return new Container(
-              padding: new EdgeInsets.all(20.0),
-              child: new Row(
-                children: <Widget>[
-                  new ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext ctxt, int index) {
-                        return new ListTile(
-                          title: Text(snapshot.data[index].name),
-                          subtitle: Text(snapshot.data[index].id.toString()),
-                          onTap: () { /* react to the tile being tapped */ },
-                        );
-                      }),
-                  
-                ],
-              ));
+          createList(snapshot.data);
         } else if (snapshot.hasError) {
           return new Text("${snapshot.error}");
         }
@@ -48,5 +33,19 @@ class MyAppState extends State<MyApp> {
               title: new Text('Load Json'),
             ),
             body: futureWidget()));
+  }
+
+  Widget createList(List<Student> data) {
+    return new ListView.builder(
+    padding: const EdgeInsets.all(10.0),
+    itemCount: data.length,
+    itemBuilder: (BuildContext ctxt, int index) {
+                        return new ListTile(
+                          title: Text(data[index].name),
+                          subtitle: Text(data[index].id.toString()),
+                          onTap: () { /* react to the tile being tapped */ },
+                        );
+                      },
+           );
   }
 }
