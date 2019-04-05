@@ -11,6 +11,20 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+   Widget createList(List<Student> data) {
+    return new ListView.builder(
+    padding: const EdgeInsets.all(10.0),
+    itemCount: data.length,
+    itemBuilder: (BuildContext ctxt, int index) {
+                        return new ListTile(
+                          title: Text(data[index].name),
+                          subtitle: Text(data[index].id.toString()),
+                          onTap: () { /* react to the tile being tapped */ },
+                        );
+                      },
+           );
+  }
+  
   Widget futureWidget() {
     return new FutureBuilder<List<Student>>(
       future: loadStudent(),
@@ -35,17 +49,5 @@ class MyAppState extends State<MyApp> {
             body: futureWidget()));
   }
 
-  Widget createList(List<Student> data) {
-    return new ListView.builder(
-    padding: const EdgeInsets.all(10.0),
-    itemCount: data.length,
-    itemBuilder: (BuildContext ctxt, int index) {
-                        return new ListTile(
-                          title: Text(data[index].name),
-                          subtitle: Text(data[index].id.toString()),
-                          onTap: () { /* react to the tile being tapped */ },
-                        );
-                      },
-           );
-  }
+ 
 }
