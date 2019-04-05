@@ -11,18 +11,18 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-   Widget createList(List<Student> data) {
+  Widget createList(List<Student> data) {
     return new ListView.builder(
-    padding: const EdgeInsets.all(10.0),
-    itemCount: data.length,
-    itemBuilder: (BuildContext context, int index) {
-                        return new ListTile(
-                          title: Text(data[index].name),
-                          subtitle: Text(data[index].id.toString()),
-                          onTap: () { /* react to the tile being tapped */ },
-                        );
-                      },
-           );
+      padding: const EdgeInsets.all(10.0),
+      itemCount: data.length,
+      itemBuilder: (BuildContext context, int index) {
+        return new ListTile(
+          title: Text(data[index].name),
+          subtitle: Text(data[index].id.toString()),
+          onTap: () {/* react to the tile being tapped */},
+        );
+      },
+    );
   }
 
   Widget futureWidget() {
@@ -36,7 +36,11 @@ class MyAppState extends State<MyApp> {
               child: new Row(
                 children: <Widget>[
                   Text(
-                      "Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} ")
+                      "Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
+                  Text(
+                      "Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
+                  Text(
+                      "Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
                 ],
               ));
         } else if (snapshot.hasError) {
@@ -56,6 +60,4 @@ class MyAppState extends State<MyApp> {
             ),
             body: futureWidget()));
   }
-
- 
 }
