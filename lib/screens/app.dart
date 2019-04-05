@@ -15,7 +15,7 @@ class MyAppState extends State<MyApp> {
     return new ListView.builder(
     padding: const EdgeInsets.all(10.0),
     itemCount: data.length,
-    itemBuilder: (BuildContext ctxt, int index) {
+    itemBuilder: (BuildContext context, int index) {
                         return new ListTile(
                           title: Text(data[index].name),
                           subtitle: Text(data[index].id.toString()),
@@ -24,13 +24,21 @@ class MyAppState extends State<MyApp> {
                       },
            );
   }
-  
+
   Widget futureWidget() {
     return new FutureBuilder<List<Student>>(
       future: loadStudent(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          createList(snapshot.data);
+          // createList(snapshot.data);
+          return new Container(
+              padding: new EdgeInsets.all(20.0),
+              child: new Row(
+                children: <Widget>[
+                  Text(
+                      "Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} ")
+                ],
+              ));
         } else if (snapshot.hasError) {
           return new Text("${snapshot.error}");
         }
