@@ -37,14 +37,25 @@ class MyAppState extends State<MyApp> {
           title: new Text(widget.title),
         ),
         body: new Center(
-          child: new ListView(
-            children: data
-                .map((data) => new ListTile(
-                      title: new Text(data.id.toString()),
-                      subtitle: new Text(data.name),
-                    ))
-                .toList(),
-          ),
+          child: new ListView.builder(
+            itemCount:  (data == null) ? 0 : data.length ,
+            itemBuilder: (BuildContext context, index) {
+              return new Card(
+                child: new ListTile(
+                  title: new Text(data[index].id.toString()),
+                      subtitle: new Text(data[index].name),
+                )
+              );
+            },
+          )
+          // ListView(
+          //   children: data
+          //       .map((data) => new ListTile(
+          //             title: new Text(data.id.toString()),
+          //             subtitle: new Text(data.name),
+          //           ))
+          //       .toList(),
+          // ),
         ),
       );
     }
