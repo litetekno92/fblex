@@ -20,6 +20,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   List<Student> data =[];
+  String title = "Kdr Testing";
   
   MyAppState() {
     loadStudent().then((val) => setState(() {
