@@ -31,26 +31,23 @@ class MyAppState extends State<MyApp> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // createList(snapshot.data);
-          return new Container(
-              padding: new EdgeInsets.all(20.0),
-              child: new Row(
-                children: <Widget>[
-                  ListView(children: <Widget>[
-                    ListTile(
-                      title: Text(
-                          " Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
-                    ),
-                    ListTile(
-                      title: Text(
-                          " Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
-                    ),
-                    ListTile(
-                      title: Text(
-                          " Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
-                    ),
-                  ])
-                ],
-              ));
+          return new ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(20.0),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                      " Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
+                ),
+                ListTile(
+                  title: Text(
+                      " Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
+                ),
+                ListTile(
+                  title: Text(
+                      " Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
+                ),
+              ]);
         } else if (snapshot.hasError) {
           return new Text("${snapshot.error}");
         }
