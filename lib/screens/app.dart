@@ -24,6 +24,25 @@ class MyAppState extends State<MyApp> {
       },
     );
   }
+  Widget createStaticList(List<Student> data) {
+    return new ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(20.0),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                      " Hi ${data[0].name} your id is ${data[0].id} and score ${data[0].score} "),
+                ),
+                ListTile(
+                  title: Text(
+                      " Hi ${data[1].name} your id is ${data[1].id} and score ${data[1].score} "),
+                ),
+                ListTile(
+                  title: Text(
+                      " Hi ${data[2].name} your id is ${data[2].id} and score ${data[2].score} "),
+                ),
+              ]);
+  }
 
   Widget futureWidget() {
     return new FutureBuilder<List<Student>>(
@@ -31,23 +50,24 @@ class MyAppState extends State<MyApp> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           // createList(snapshot.data);
-          return new ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(20.0),
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                      " Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
-                ),
-                ListTile(
-                  title: Text(
-                      " Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
-                ),
-                ListTile(
-                  title: Text(
-                      " Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
-                ),
-              ]);
+          createStaticList(snapshot.data);
+          // return new ListView(
+          //     shrinkWrap: true,
+          //     padding: const EdgeInsets.all(20.0),
+          //     children: <Widget>[
+          //       ListTile(
+          //         title: Text(
+          //             " Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
+          //       ),
+          //       ListTile(
+          //         title: Text(
+          //             " Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
+          //       ),
+          //       ListTile(
+          //         title: Text(
+          //             " Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
+          //       ),
+          //     ]);
         } else if (snapshot.hasError) {
           return new Text("${snapshot.error}");
         }
