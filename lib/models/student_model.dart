@@ -2,9 +2,10 @@
 //
 //     final student = studentFromJson(jsonString);
 
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'dart:async' show Future;
+import 'dart:async' ;
 import 'package:flutter/services.dart' show rootBundle;
 
 List<Student> studentFromJson(String str) {
@@ -21,6 +22,7 @@ class Student {
     String id;
     String name;
     int score;
+    //final AsyncMemoizer memoizer = AsyncMemoizer();
 
     Student({
         this.id,
@@ -41,6 +43,8 @@ class Student {
     };
 }
 
+
+
 Future<String> _loadAStudentAsset() async {
   return await rootBundle.loadString('assets/student.json');
 }
@@ -51,6 +55,15 @@ Future <List<Student>> loadStudent() async {
   final students = studentFromJson(jsonString);
   return students;
 }
+
+// Future <List<Student>> loadStudent() {
+//   return this.memoizer.runOnce(() async {
+//   await wait(2);
+//   String jsonString = await _loadAStudentAsset();
+//   final students = studentFromJson(jsonString);
+//   return students;
+// });
+// }
 
 Future wait(int seconds) {
   return new Future.delayed(Duration(seconds: seconds), () => {});

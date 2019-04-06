@@ -1,88 +1,59 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:convert';
-import 'dart:async' show Future;
-import 'package:flutter/services.dart' show rootBundle;
+
+import 'package:flutter/material.dart';
 import 'package:fblex/models/student_model.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
 
 class MyApp extends StatefulWidget {
-  MyApp();
+  MyApp({Key key, this.title}) : super(key: key);
+  final String title;
+
   @override
-  MyAppState createState() => MyAppState();
+  MyAppState createState() => new MyAppState();
+
+ 
 }
+
+
 
 class MyAppState extends State<MyApp> {
-  Widget createList(List<Student> data) {
-    return new ListView.builder(
-      padding: const EdgeInsets.all(10.0),
-      itemCount: data.length,
-      itemBuilder: (BuildContext context, int index) {
-        return new ListTile(
-          title: Text(data[index].name),
-          subtitle: Text(data[index].id.toString()),
-          onTap: () {/* react to the tile being tapped */},
-        );
-      },
-    );
-  }
-  Widget createStaticList(List<Student> data) {
-    return new ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(20.0),
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                      " Hi ${data[0].name} your id is ${data[0].id} and score ${data[0].score} "),
-                ),
-                ListTile(
-                  title: Text(
-                      " Hi ${data[1].name} your id is ${data[1].id} and score ${data[1].score} "),
-                ),
-                ListTile(
-                  title: Text(
-                      " Hi ${data[2].name} your id is ${data[2].id} and score ${data[2].score} "),
-                ),
-              ]);
+  List<Student> data;
+  
+  MyAppState() {
+    loadStudent().then((val) => setState(() {
+          data= val;
+        }));
   }
 
-  Widget futureWidget() {
-    return new FutureBuilder<List<Student>>(
-      future: loadStudent(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          // createList(snapshot.data);
-          createStaticList(snapshot.data);
-          // return new ListView(
-          //     shrinkWrap: true,
-          //     padding: const EdgeInsets.all(20.0),
-          //     children: <Widget>[
-          //       ListTile(
-          //         title: Text(
-          //             " Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
-          //       ),
-          //       ListTile(
-          //         title: Text(
-          //             " Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
-          //       ),
-          //       ListTile(
-          //         title: Text(
-          //             " Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
-          //       ),
-          //     ]);
-        } else if (snapshot.hasError) {
-          return new Text("${snapshot.error}");
-        }
-        return new CircularProgressIndicator();
-      },
-    );
-  }
 
+  
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: new Scaffold(
-            appBar: new AppBar(
-              title: new Text('Load Json'),
-            ),
-            body: futureWidget()));
+    if (data == null) {
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Loading..."),
+        ),
+      );
+    } else {
+      return new Scaffold(
+        appBar: new AppBar(
+          title: new Text(widget.title),
+        ),
+        body: new Center(
+          child: new ListView(
+            children: data
+                .map((data) => new ListTile(
+                      title: new Text(data.id.toString()),
+                      subtitle: new Text(data.name),
+                    ))
+                .toList(),
+          ),
+        ),
+      );
+    }
   }
 }
+
