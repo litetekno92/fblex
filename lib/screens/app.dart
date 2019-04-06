@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 
 
 class MyAppState extends State<MyApp> {
-  List<Student> data;
+  List<Student> data =[];
   
   MyAppState() {
     loadStudent().then((val) => setState(() {
@@ -31,14 +31,7 @@ class MyAppState extends State<MyApp> {
   
   @override
   Widget build(BuildContext context) {
-    if (data == null) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Loading..."),
-        ),
-      );
-    } else {
-      return new Scaffold(
+        return new Scaffold(
         appBar: new AppBar(
           title: new Text(widget.title),
         ),
@@ -54,6 +47,6 @@ class MyAppState extends State<MyApp> {
         ),
       );
     }
-  }
+  
 }
 
