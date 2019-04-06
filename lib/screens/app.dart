@@ -35,12 +35,20 @@ class MyAppState extends State<MyApp> {
               padding: new EdgeInsets.all(20.0),
               child: new Row(
                 children: <Widget>[
-                  Text(
-                      "'\n' Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
-                  Text(
-                      "'\n' Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
-                  Text(
-                      "'\n' Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
+                  ListView(children: <Widget>[
+                    ListTile(
+                      title: Text(
+                          " Hi ${snapshot.data[0].name} your id is ${snapshot.data[0].id} and score ${snapshot.data[0].score} "),
+                    ),
+                    ListTile(
+                      title: Text(
+                          " Hi ${snapshot.data[1].name} your id is ${snapshot.data[1].id} and score ${snapshot.data[1].score} "),
+                    ),
+                    ListTile(
+                      title: Text(
+                          " Hi ${snapshot.data[2].name} your id is ${snapshot.data[2].id} and score ${snapshot.data[2].score} "),
+                    ),
+                  ])
                 ],
               ));
         } else if (snapshot.hasError) {
