@@ -56,8 +56,8 @@ class MyAppState extends State<MyApp> {
         itemBuilder: (BuildContext context, index) {
           return new Card(
               child: new ListTile(
-            title: new Text(data == null ? 'Empty Id' : data[index].id),
-            subtitle: new Text(data == null ? 'Empty Name' : data[index].name),
+            title: new Text(data == null ? 'Loading ...' : data[index].id),
+            subtitle: new Text(data == null ? 'Loading' : data[index].name),
           ));
         },
       )
