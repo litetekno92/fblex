@@ -52,12 +52,12 @@ class MyAppState extends State<MyApp> {
       ),
       body: new Center(
           child: new ListView.builder(
-        itemCount: (data == null) ? 0 : data.length,
+        itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, index) {
           return new Card(
               child: new ListTile(
-            title: new Text(data[index].id ?? ''),
-            subtitle: new Text(data[index].name ?? ''),
+            title: new Text(data == null ? 'Empty Id' : data[index].id),
+            subtitle: new Text(data == null ? 'Empty Name' : data[index].name),
           ));
         },
       )
