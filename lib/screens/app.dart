@@ -40,6 +40,7 @@ class MyAppState extends State<MyApp> {
 
   @override
   void initState()  {
+    super.initState();
     this.loadStudent();
   }
 
